@@ -1,3 +1,12 @@
+<?php require_once './controller-data.php' ?>
+
+<?php 
+    if(isset($_SESSION["username"])){
+        header("Location: ./dashboard/");
+    exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +28,21 @@
       rel="stylesheet"
     />
 
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             display: flex;
-            height: 100vh;
             color: #212121;
         }
 
         .container {
             display: flex;
             width: 100%;
+            height: 100vh;
         }
 
         .left-section {
@@ -56,12 +68,12 @@
         }
 
         .left-section .konten .zovy img {
-            max-width: 250px;
+            max-width: 200px;
             margin: 0 auto;
         }
         .left-section .konten .zovy h1{
             text-align: center;
-            margin-top: -50px;
+            margin-top: -20px;
             font-size: 21px;
             letter-spacing: 10px;
             font-weight: 900;
@@ -149,7 +161,7 @@
 
         .right-section {
             width: 50%;
-            background: url('../assets/img/pexels-lilartsy-1374128.jpg');
+            background: url('../assets/img/login-logo.jpg');
             background-size: cover;
             background-position: top;
         }
@@ -160,8 +172,8 @@
         <div class="left-section">
             <div class="konten">
                 <div class="zovy">
-                    <img src="../assets/img/zovy.png" alt="Zovy Logo">
-                    <h1>Zovy.</h1>
+                    <img src="../assets/img/zovy-logo.png" alt="Zovy Logo">
+                    <h1>ZOVY.</h1>
                 </div>
                 <hr>
                 <h2><i class="fas fa-user-lock"></i> Admin Login</h2>
@@ -177,12 +189,26 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
 
-                    <button type="submit" name="login"><i class="fas fa-right-to-bracket"></i> Login</button>
+                    <button type="submit" name="login"> <i class="fas fa-right-to-bracket"></i> Login</button>
                 </form>
                 <p class="copyright">© 2024 Zovy. All rights reserved.</p>
             </div>
         </div>
         <div class="right-section"></div>
     </div>
+
+    <!-- Sweet Alert -->
+    <script src="sweetalert2.all.min.js"></script>
+
+    <?php if(isset($errors['username'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $errors['username']; ?>'
+            });
+        </script>
+    <?php endif; ?>
+    
 </body>
 </html>
